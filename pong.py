@@ -24,7 +24,12 @@ display.update() allows to update a portion of the screen, instead of the entire
 To tell PyGame which portions
 """
 pygame.init()
-screen: pygame.Surface = pygame.display.set_mode((400, 400))
+WINDOW_WIDTH = 500
+WINDOW_HEIGHT = 400
+SCREEN_CENTER_X = WINDOW_WIDTH / 2
+SCREEN_CENTER_Y = WINDOW_HEIGHT / 2
+
+screen: pygame.Surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 left_paddle_color = pygame.Color(33, 33, 11, 40)
 right_paddle_color = pygame.Color(33, 33, 255, 0)
 right_paddle = pygame.Rect(200, 200, 75, 125)
@@ -34,7 +39,11 @@ RED = (255, 0, 0)
 GOLDEN_ROD = (218, 165, 32)
 PADDLE_WIDTH = 15
 PADDLE_HEIGHT = 80
-BALL = pygame.Rect(200, 200, 15, 15)
+BALL_SIZE = 50
+BALL_SPEED_FACTOR = 20.53
+ball_x = SCREEN_CENTER_X - (BALL_SIZE / 2)
+ball_y = SCREEN_CENTER_Y - (BALL_SIZE / 2)
+ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
 ball_color = (0, 0, 0)
 
 # pygame.display.update()
@@ -62,8 +71,7 @@ while True:
     # Render objects to buffer
     screen.fill(GOLDEN_ROD)     
     pygame.draw.rect(screen, left_paddle_color, left_paddle)
-    pygame.draw.rect(screen, right_paddle_color, right_paddle)
-    pygame.draw.rect(screen, ball_color, BALL)
+    pygame.draw.rect(screen, ball_color, ball_rect)
     # Render to screen (update current frame)
     pygame.display.update()
 
