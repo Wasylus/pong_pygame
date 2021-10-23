@@ -62,6 +62,8 @@ while True:
     left_paddle = pygame.Rect(pallet_x, pallet_y, PADDLE_WIDTH, PADDLE_HEIGHT)
     pallet_y += 1
 
+    ball_x += ball_direction_sign * (0.143 * BALL_SPEED_FACTOR)
+    ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
     
     # Render objects to buffer
     screen.fill(GOLDEN_ROD)     
