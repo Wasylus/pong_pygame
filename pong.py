@@ -64,6 +64,10 @@ while True:
 
     ball_x += ball_direction_sign * (0.143 * BALL_SPEED_FACTOR)
     ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
+
+    # Check if ball touches wall on the right
+    if ball_x >= WINDOW_WIDTH - BALL_SIZE:
+        ball_direction_sign = -1
     
     # Render objects to buffer
     screen.fill(GOLDEN_ROD)     
