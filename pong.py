@@ -31,8 +31,6 @@ SCREEN_CENTER_Y = WINDOW_HEIGHT / 2
 
 screen: pygame.Surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 left_paddle_color = pygame.Color(33, 33, 11, 40)
-right_paddle_color = pygame.Color(33, 33, 255, 0)
-right_paddle = pygame.Rect(200, 200, 75, 125)
 
 
 RED = (255, 0, 0)
@@ -46,12 +44,9 @@ ball_y = SCREEN_CENTER_Y - (BALL_SIZE / 2)
 ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
 ball_color = (0, 0, 0)
 
-# pygame.display.update()
-# pygame.draw.rect(screen, left_paddle_color, right_paddle)
-
-# should_quit_now = False
-x = 0
-y = 0
+pallet_x = 0
+pallet_y = 0
+ball_direction_sign = 1
 while True:
     # Take input and handle events (keyboard/mouse)
     event_list = pygame.event.get()
@@ -64,9 +59,9 @@ while True:
             pygame.quit()
 
     # Execute some game logic
-    left_paddle = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
-    x += 0.1
-    y += 1
+    left_paddle = pygame.Rect(pallet_x, pallet_y, PADDLE_WIDTH, PADDLE_HEIGHT)
+    pallet_y += 1
+
     
     # Render objects to buffer
     screen.fill(GOLDEN_ROD)     
