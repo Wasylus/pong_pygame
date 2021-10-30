@@ -46,7 +46,11 @@ ball_color = (0, 0, 0)
 
 pallet_x = 0
 pallet_y = 0
-ball_direction_sign = 1
+ball_direction_x = 1
+ball_direction_y = 1
+ball_speed_x_axis = 3
+ball_speed_y_axis = 7
+
 while True:
     # Take input and handle events (keyboard/mouse)
     event_list = pygame.event.get()
@@ -62,17 +66,34 @@ while True:
     left_paddle = pygame.Rect(pallet_x, pallet_y, PADDLE_WIDTH, PADDLE_HEIGHT)
     pallet_y += 1
 
-    ball_x += ball_direction_sign * (0.143 * BALL_SPEED_FACTOR)
+    ball_x += ball_direction_x * ball_speed_x_axis * BALL_SPEED_FACTOR
+    ball_y += ball_direction_y * ball_speed_y_axis * BALL_SPEED_FACTOR
     ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
 
     # Check if ball touches wall on the right
     if ball_x >= WINDOW_WIDTH - BALL_SIZE:
-        ball_direction_sign = -1
+        ball_direction_x = -1
+
+    # Check if ball touches wall on the left
+    if ball_x <= 0:
+        ball_direction_x = 1
+
+    # Check if ball touches wall on the bottom
+    if ball_y >= WINDOW_HEIGHT - BALL_SIZE:
+        ball_direction_y = -1
+    
+    # Check if ball touches wall on the top
+    # TODO ball does not bounce when ball_speed is [-3, -7]
+    # TODO we need to change sign and not hardcode it
+    if ball_y <= 0:
+        ball_direction_y = 1
+
     
     # Render objects to buffer
     screen.fill(GOLDEN_ROD)     
     pygame.draw.rect(screen, left_paddle_color, left_paddle)
     pygame.draw.rect(screen, ball_color, ball_rect)
+
     # Render to screen (update current frame)
     pygame.display.update()
 
