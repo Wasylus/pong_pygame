@@ -24,7 +24,7 @@ display.update() allows to update a portion of the screen, instead of the entire
 To tell PyGame which portions
 """
 pygame.init()
-WINDOW_WIDTH = 500
+WINDOW_WIDTH = 400
 WINDOW_HEIGHT = 400
 SCREEN_CENTER_X = WINDOW_WIDTH / 2
 SCREEN_CENTER_Y = WINDOW_HEIGHT / 2
