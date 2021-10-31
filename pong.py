@@ -37,11 +37,15 @@ RED = (255, 0, 0)
 GOLDEN_ROD = (218, 165, 32)
 PADDLE_WIDTH = 15
 PADDLE_HEIGHT = 80
+
 BALL_SIZE = 50
+BALL_RECT_DIMENSIONS = (BALL_SIZE, BALL_SIZE)
 BALL_SPEED_FACTOR = 1
 ball_x = SCREEN_CENTER_X - (BALL_SIZE / 2)
 ball_y = SCREEN_CENTER_Y - (BALL_SIZE / 2)
-ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
+ball_xy = (ball_x, ball_y)
+
+ball_rect = pygame.Rect(ball_xy, BALL_RECT_DIMENSIONS)
 ball_color = (0, 0, 0)
 
 pallet_x = 0
@@ -80,26 +84,27 @@ while True:
     left_paddle = pygame.Rect(pallet_x, pallet_y, PADDLE_WIDTH, PADDLE_HEIGHT)
     pallet_y += 1
 
-    ball_x += ball_direction_x * ball_speed_x_axis * BALL_SPEED_FACTOR
-    ball_y += ball_direction_y * ball_speed_y_axis * BALL_SPEED_FACTOR
-    ball_rect = pygame.Rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE)
+    ball_offset_x = ball_direction_x * ball_speed_x_axis * BALL_SPEED_FACTOR
+    ball_offset_y = ball_direction_y * ball_speed_y_axis * BALL_SPEED_FACTOR
+    ball_rect = ball_rect.move(ball_offset_x, ball_offset_y)
+    # We could use in-place variant of that method instead
+    # ball_rect.move_ip(offset_x, offset_y)
 
     # Check if ball touches wall on the right
-    if ball_x >= WINDOW_WIDTH - BALL_SIZE:
+    if ball_rect.x >= WINDOW_WIDTH - BALL_SIZE:
         ball_direction_x = -1
 
     # Check if ball touches wall on the left
-    if ball_x <= 0:
+    if ball_rect.x <= 0:
         ball_direction_x = 1
 
     # Check if ball touches wall on the bottom
-    if ball_y >= WINDOW_HEIGHT - BALL_SIZE:
+    if ball_rect.y >= WINDOW_HEIGHT - BALL_SIZE:
         ball_direction_y = -1
     
     # Check if ball touches wall on the top
     # TODO ball does not bounce when ball_speed is [-3, -7]
-    # TODO we need to change sign and not hardcode it
-    if ball_y <= 0:
+    if ball_rect.y <= 0:
         ball_direction_y = 1
 
     
