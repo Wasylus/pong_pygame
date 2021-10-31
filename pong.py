@@ -68,6 +68,9 @@ ball_speed_y_axis = 7
 #         self.x += x_offset
 #         self.y += y_offset
 
+myfont = pygame.font.SysFont('Comic Sans MS', 30)
+textsurface = myfont.render('Some Text', False, (0, 0, 0))
+
 
 while True:
     # Take input and handle events (keyboard/mouse)
@@ -112,7 +115,7 @@ while True:
     screen.fill(GOLDEN_ROD)     
     pygame.draw.rect(screen, left_paddle_color, left_paddle)
     pygame.draw.rect(screen, ball_color, ball_rect)
-
+    screen.blit(textsurface,(0,0))
     # Render to screen (update current frame)
     pygame.display.update()
 
