@@ -51,6 +51,20 @@ ball_direction_y = 1
 ball_speed_x_axis = 3
 ball_speed_y_axis = 7
 
+
+# Example of how pygame.Rect could look like 
+# class Rect:
+#     def __init__(self, left, top, width, height):
+#         self.x = left
+#         self.y = top
+#         self.w = width
+#         self.h = height
+
+#     def move(self, x_offset, y_offset):
+#         self.x += x_offset
+#         self.y += y_offset
+
+
 while True:
     # Take input and handle events (keyboard/mouse)
     event_list = pygame.event.get()
